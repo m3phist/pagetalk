@@ -56,7 +56,7 @@ export const UserMenu = () => {
             <DropdownMenuItem asChild>
               <Link href="/dashboard">Dashboard</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem asChild>
               <Link href="/dashboard/billing">Billing</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>Subscription</DropdownMenuItem>
