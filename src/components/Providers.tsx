@@ -4,6 +4,7 @@ import { PropsWithChildren, useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { trpc } from '@/app/_trpc/client';
 import { httpBatchLink } from '@trpc/client';
+import { absoluteUrl } from '@/lib/utils';
 
 export const Providers = ({ children }: PropsWithChildren) => {
   const [queryClient] = useState(() => new QueryClient());
@@ -11,8 +12,9 @@ export const Providers = ({ children }: PropsWithChildren) => {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: 'https://pagetalk.vercel.app/api/trpc',
+          // url: 'https://pagetalk.vercel.app/api/trpc',
           // url: 'http://localhost:3000/api/trpc',
+          url: absoluteUrl('/api/trpc'),
         }),
       ],
     })
