@@ -40,9 +40,7 @@ export const ourFileRouter = {
         const pagesAmt = pageLevelDocs.length;
 
         // vectorize and index entire document
-
         const pineconeIndex = pinecone.index('pagetalk');
-
         const embeddings = new OpenAIEmbeddings({
           openAIApiKey: process.env.OPENAI_API_KEY!,
         });
@@ -50,6 +48,7 @@ export const ourFileRouter = {
         // namespace are no longer supported in freetier use metadata
         await PineconeStore.fromDocuments(pageLevelDocs, embeddings, {
           pineconeIndex,
+          namespace: createdFile.id,
         });
 
         await db.file.update({
