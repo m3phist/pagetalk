@@ -56,7 +56,9 @@ export const UserMenu = () => {
             <DropdownMenuItem asChild>
               <Link href="/dashboard">Dashboard</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>Billing</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/dashboard/billing">Billing</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem>Subscription</DropdownMenuItem>
             <DropdownMenuItem onClick={() => signOut(() => router.push('/'))}>
               Logout
