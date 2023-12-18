@@ -36,7 +36,7 @@ export default async function RootLayout({
               inter.className
             )}
           >
-            <Navbar userId={userId} />
+            <Navbar />
             {children}
             <Toaster />
           </body>
