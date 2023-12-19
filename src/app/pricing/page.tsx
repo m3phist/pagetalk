@@ -1,6 +1,7 @@
 import MaxWidthWrapper from '@/components/MaxWidthWrapper';
 import UpgradeButton from '@/components/UpgradeButton';
 import { buttonVariants } from '@/components/ui/button';
+import { getUserSubscriptionPlan } from '@/lib/stripe';
 import {
   Tooltip,
   TooltipContent,
@@ -8,15 +9,15 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { PLANS } from '@/config/stripe';
-import { db } from '@/db';
 import { cn } from '@/lib/utils';
 import { currentUser } from '@clerk/nextjs';
 import { ArrowRight, Check, HelpCircle, Minus } from 'lucide-react';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 
 const Page = async () => {
   const user = await currentUser();
+  const subscriptionPlan = await getUserSubscriptionPlan();
+  const isUserSubscribed = subscriptionPlan?.isSubscribed;
 
   const pricingItems = [
     {
@@ -178,7 +179,11 @@ const Page = async () => {
                             variant: 'secondary',
                           })}
                         >
-                          {user ? 'Tryout now' : 'Sign up'}
+                          {user
+                            ? isUserSubscribed
+                              ? null
+                              : 'Your Current Plan'
+                            : 'Sign up'}
                           <ArrowRight className="h-5 w-5 ml-1.5" />
                         </Link>
                       ) : user ? (
