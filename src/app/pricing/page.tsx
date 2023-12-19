@@ -18,20 +18,6 @@ import { redirect } from 'next/navigation';
 const Page = async () => {
   const user = await currentUser();
 
-  if (!user) {
-    redirect('/auth-callback?origin=pricing');
-  }
-
-  const dbUser = await db.user.findFirst({
-    where: {
-      id: user.id,
-    },
-  });
-
-  if (!dbUser) {
-    redirect('/auth-callback?origin=dashboard');
-  }
-
   const pricingItems = [
     {
       plan: 'Free',
@@ -104,6 +90,7 @@ const Page = async () => {
               const price =
                 PLANS.find((p) => p.slug === plan.toLowerCase())?.price
                   .amount || 0;
+
               return (
                 <div
                   key={plan}
@@ -191,7 +178,7 @@ const Page = async () => {
                             variant: 'secondary',
                           })}
                         >
-                          {user ? 'Upgrade now' : 'Sign up'}
+                          {user ? 'Tryout now' : 'Sign up'}
                           <ArrowRight className="h-5 w-5 ml-1.5" />
                         </Link>
                       ) : user ? (

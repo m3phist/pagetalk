@@ -1,11 +1,10 @@
-import { ClerkProvider, auth } from '@clerk/nextjs';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/toaster';
+import { ClerkProvider, auth } from '@clerk/nextjs';
+import { Inter } from 'next/font/google';
 
-import './globals.css';
-import { cn } from '@/lib/utils';
 import { Navbar } from '@/components/Navbar';
+import { cn, constructMetadata } from '@/lib/utils';
+import './globals.css';
 
 import { Providers } from '@/components/Providers';
 
@@ -14,10 +13,7 @@ import 'simplebar-react/dist/simplebar.min.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'Pagetalk',
-  description: 'Chat with your PDF documents',
-};
+export const metadata = constructMetadata();
 
 export default async function RootLayout({
   children,
