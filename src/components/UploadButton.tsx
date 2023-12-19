@@ -21,6 +21,8 @@ const UploadDropzone = ({ isSubscribed }: { isSubscribed: boolean }) => {
     isSubscribed ? 'proPlanUploader' : 'freePlanUploader'
   );
 
+  // const { startUpload } = useUploadThing('freePlanUploader');
+
   const { mutate: startPolling } = trpc.getFile.useMutation({
     onSuccess: (file) => {
       router.push(`/dashboard/${file.id}`);
