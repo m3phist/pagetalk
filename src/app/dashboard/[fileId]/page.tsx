@@ -1,10 +1,17 @@
-import { ChatWrapper } from '@/components/chat/ChatWrapper';
+import ChatWrapper from '@/components/chat/ChatWrapper';
 import { PdfRenderer } from '@/components/PdfRenderer';
 import { db } from '@/db';
+import { getUserSubscriptionPlan } from '@/lib/stripe';
 import { auth } from '@clerk/nextjs';
 import { notFound, redirect } from 'next/navigation';
 
-const FileIdPage = async ({ params }: { params: { fileId: string } }) => {
+interface PageProps {
+  params: {
+    fileId: string;
+  };
+}
+
+const Page = async ({ params }: PageProps) => {
   const { fileId } = params;
 
   const { userId } = auth();
@@ -19,6 +26,8 @@ const FileIdPage = async ({ params }: { params: { fileId: string } }) => {
   });
 
   if (!file) notFound();
+
+  const plan = await getUserSubscriptionPlan();
 
   console.log(file);
 
@@ -35,11 +44,11 @@ const FileIdPage = async ({ params }: { params: { fileId: string } }) => {
 
         {/* right side */}
         <div className="shrink-0 flex-[0.75] border-t border-gray-200 lg:w-96 lg:border-l lg:border-t-0">
-          <ChatWrapper fileId={fileId} />
+          <ChatWrapper isSubscribed={plan.isSubscribed} fileId={fileId} />
         </div>
       </div>
     </div>
   );
 };
 
-export default FileIdPage;
+export default Page;
