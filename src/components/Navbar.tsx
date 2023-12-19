@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 
 import { UserAccountNav } from './UserAccountNav';
 import { currentUser } from '@clerk/nextjs';
+import MobileNav from './MobileNav';
 
 export const Navbar = async () => {
   const user = await currentUser();
@@ -16,8 +17,10 @@ export const Navbar = async () => {
             <span>pagetalk.</span>
           </Link>
 
-          {/* TODO: Add Mobile Navbar */}
+          {/* Mobile Navbar */}
+          <MobileNav isAuth={!!user} />
 
+          {/* Desktop Navbar */}
           <div className="hidden items-center space-x-4 sm:flex">
             {!user ? (
               <>
