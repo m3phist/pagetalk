@@ -131,6 +131,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import { OpenAIStream, StreamingTextResponse } from 'ai';
 
+export const maxDuration = 30;
+
 export const POST = async (req: NextRequest) => {
   try {
     // endpoint for asking a question to a pdf file
