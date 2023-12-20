@@ -240,6 +240,7 @@ export const POST = async (req: NextRequest) => {
 
     return new StreamingTextResponse(stream);
   } catch (error: any) {
+    console.log('[MESSAGE]', error);
     return new NextResponse(`Stream Error: ${error.message}`, { status: 400 });
   }
 };
