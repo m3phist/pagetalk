@@ -1,4 +1,11 @@
 import { getUserSubscriptionPlan } from '@/lib/stripe';
+import { SignOutButton } from '@clerk/nextjs';
+import { Gem } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Icons } from './Icons';
+import { Avatar, AvatarFallback } from './ui/avatar';
+import { Button } from './ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,14 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
-import { Button } from './ui/button';
-import { Avatar, AvatarFallback } from './ui/avatar';
-import Image from 'next/image';
-import { Icons } from './Icons';
-import Link from 'next/link';
-import { Gem } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { SignOutButton } from '@clerk/nextjs';
 
 interface UserAccountNavProps {
   email: string;
